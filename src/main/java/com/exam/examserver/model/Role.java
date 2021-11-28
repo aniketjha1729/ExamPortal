@@ -8,22 +8,18 @@ import java.util.Set;
 @Table(name="roles")
 public class Role {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long roleId;
     private String roleName;
-
 
     @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY,mappedBy = "role")
     private Set<UserRole> userRoles=new HashSet<>();
 
-
     public Role() {
     }
 
-    public Role(Long roleId, String roleName, Set<UserRole> userRoles) {
+    public Role(Long roleId, String roleName) {
         this.roleId = roleId;
         this.roleName = roleName;
-        this.userRoles = userRoles;
     }
 
     public Set<UserRole> getUserRoles() {

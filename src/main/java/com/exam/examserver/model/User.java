@@ -12,7 +12,7 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String userName;
+    private String username;
     private String password;
     private  String firstName;
     private  String lastName;
@@ -25,11 +25,28 @@ public class User {
     @JsonIgnore
     private Set<UserRole> userRoles=new HashSet<>();
 
+
     public User() {
+    }
+
+    public User(Long id, String username, String password, String firstName, String lastName, String email, String number, boolean enable, String profile) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.number = number;
+        this.enable = enable;
+        this.profile = profile;
     }
 
     public String getProfile() {
         return profile;
+    }
+
+    public void setProfile(String profile) {
+        this.profile = profile;
     }
 
     public Set<UserRole> getUserRoles() {
@@ -40,22 +57,6 @@ public class User {
         this.userRoles = userRoles;
     }
 
-    public void setProfile(String profile) {
-        this.profile = profile;
-    }
-
-    public User(Long id, String userName, String password, String firstName, String lastName, String email, String number, boolean enable, String profile, Set<UserRole> userRoles) {
-        this.id = id;
-        this.userName = userName;
-        this.password = password;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.number = number;
-        this.enable = enable;
-        this.profile = profile;
-        this.userRoles = userRoles;
-    }
 
     public Long getId() {
         return id;
@@ -66,11 +67,11 @@ public class User {
     }
 
     public String getUserName() {
-        return userName;
+        return username;
     }
 
     public void setUserName(String userName) {
-        this.userName = userName;
+        this.username = userName;
     }
 
     public String getPassword() {

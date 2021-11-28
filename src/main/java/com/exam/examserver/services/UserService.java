@@ -1,4 +1,4 @@
-package com.exam.examserver.service;
+package com.exam.examserver.services;
 
 import com.exam.examserver.model.User;
 import com.exam.examserver.model.UserRole;
