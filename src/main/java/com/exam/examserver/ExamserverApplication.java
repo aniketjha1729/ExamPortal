@@ -25,28 +25,28 @@ public class ExamserverApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		System.out.println("Here......");
-
-		User user=new User();
-		user.setFirstName("Aniket");
-		user.setLastName("Jha");
-		user.setUserName("anb123");
-		user.setPassword("Aniket");
-		user.setEmail("a@gmail.com");
-		user.setProfile("default.png");
-
-		Role role1= new Role();
-		role1.setRoleId(44L);
-		role1.setRoleName("developer");
-
-		Set<UserRole> userRoleSet=new HashSet<>();
-		UserRole userRole=new UserRole();
-		userRole.setRole(role1);
-		userRole.setUser(user);
-		userRoleSet.add(userRole);
-
-		User user1=this.userService.createUser(user,userRoleSet);
-
-		System.out.println(user1.getUserName());
+//
+//		User user=new User();
+//		user.setFirstName("Aniket");
+//		user.setLastName("Jha");
+//		user.setUserName("anb123");
+//		user.setPassword("Aniket");
+//		user.setEmail("a@gmail.com");
+//		user.setProfile("default.png");
+//
+//		Role role1= new Role();
+//		role1.setRoleId(44L);
+//		role1.setRoleName("admin");
+//
+//		Set<UserRole> userRoleSet=new HashSet<>();
+//		UserRole userRole=new UserRole();
+//		userRole.setRole(role1);
+//		userRole.setUser(user);
+//		userRoleSet.add(userRole);
+//
+//		User user1=this.userService.createUser(user,userRoleSet);
+//
+//		System.out.println(user1.getUserName());
 
 	}
 }

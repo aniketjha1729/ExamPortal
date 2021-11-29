@@ -1,14 +1,17 @@
 package com.exam.examserver.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
 @Table(name="users")
-public class User {
+public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -18,7 +21,6 @@ public class User {
     private  String lastName;
     private  String email;
     private  String number;
-    private boolean enable=true;
     private  String profile;
 
     @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER,mappedBy = "user")
@@ -29,7 +31,7 @@ public class User {
     public User() {
     }
 
-    public User(Long id, String username, String password, String firstName, String lastName, String email, String number, boolean enable, String profile) {
+    public User(Long id, String username, String password, String firstName, String lastName, String email, String number, String profile) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -37,7 +39,7 @@ public class User {
         this.lastName = lastName;
         this.email = email;
         this.number = number;
-        this.enable = enable;
+
         this.profile = profile;
     }
 
@@ -56,7 +58,6 @@ public class User {
     public void setUserRoles(Set<UserRole> userRoles) {
         this.userRoles = userRoles;
     }
-
 
     public Long getId() {
         return id;
@@ -114,11 +115,40 @@ public class User {
         this.number = number;
     }
 
-    public boolean isEnable() {
-        return enable;
+
+
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        Set<Authority> set=new HashSet<>();
+        this.userRoles.forEach(userRole->{
+            set.add(new Authority(userRole.getRole().getRoleName()));
+        });
+        return set;
     }
 
-    public void setEnable(boolean enable) {
-        this.enable = enable;
+    @Override
+    public String getUsername() {
+        return null;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
     }
 }
